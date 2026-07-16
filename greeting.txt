@@ -1,2 +1,3 @@
 Hello world
-This line will change
+This line has CHANGED
+And this one is brand new
