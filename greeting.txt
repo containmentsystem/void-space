@@ -1,3 +1,3 @@
 Hello world
-This line has CHANGD
+This line has CHANGED
 And this one is brand new
