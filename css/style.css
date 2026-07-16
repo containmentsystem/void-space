@@ -1,0 +1,110 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  width: 100%;
+  background-color: #ffffff;
+  overflow-x: hidden;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.glow-circle {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: clamp(15rem, 30vmax, 40rem);
+  height: clamp(15rem, 30vmax, 40rem);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  background: radial-gradient(
+    circle,
+    rgba(0, 0, 0, var(--alpha-core, 0.8)) 0%,
+    rgba(0, 0, 0, var(--alpha-edge, 0)) 100%
+  );
+  filter: blur(var(--blur, 60px));
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* scroll distance over which the circle envelops the screen */
+.void-spacer {
+  height: 200vh;
+  height: 200svh;
+}
+
+.content {
+  padding-bottom: 70vh;
+  padding-bottom: 70svh;
+}
+
+/* dual-inset sticky: held 6svh above the viewport bottom until its natural
+   flow position scrolls up past that line, then it travels with the page
+   and pins 6svh below the viewport top. no js, so no handoff to misalign. */
+.void-title {
+  position: sticky;
+  top: 6vh;
+  top: 6svh;
+  bottom: 6vh;
+  bottom: 6svh;
+  z-index: 1;
+  width: fit-content;
+  /* line-height: 1 keeps the title exactly 1em tall, so this places its
+     natural position 6svh above the bottom of the 3rd viewport-height,
+     right where the docked title sits as envelopment completes */
+  margin: calc(94vh - 1em) auto 0;
+  margin: calc(94svh - 1em) auto 0;
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1;
+  letter-spacing: 0.4em;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  pointer-events: none;
+  user-select: none;
+}
+
+.lorem {
+  max-width: 36rem;
+  margin: 25vh auto 0;
+  margin: 25svh auto 0;
+  padding: 0 1.25rem;
+  font-size: 0.95rem;
+  line-height: 1.8;
+  text-align: center;
+  color: #ffffff;
+  mix-blend-mode: difference;
+}
+
+.lorem p + p {
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 40rem) {
+  .void-title {
+    font-size: 2rem;
+  }
+
+  .lorem {
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    line-height: 1.9;
+  }
+
+  .lorem p + p {
+    margin-top: 1.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-circle {
+    transition: none;
+  }
+}
