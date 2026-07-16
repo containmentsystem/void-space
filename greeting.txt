@@ -1,3 +1,1 @@
-Hello world
-This line has CHANGED
-And this one is brand new
+Empty
