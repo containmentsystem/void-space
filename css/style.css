@@ -22,14 +22,14 @@ body {
   width: clamp(15rem, 30vmax, 40rem);
   height: clamp(15rem, 30vmax, 40rem);
   border-radius: 50%;
-  transform: translate(-50%, -50%) scale(var(--scale, 1));
+  transform: translate(-50%, -50%) scale(calc(var(--scale, 1) * var(--pulse, 1)));
   background: radial-gradient(
     circle,
     rgba(0, 0, 0, var(--alpha-core, 0.8)) 0%,
     rgba(0, 0, 0, var(--alpha-edge, 0)) 100%
   );
   filter: blur(var(--blur, 60px));
-  transition: transform 0.1s ease-out, filter 0.1s ease-out;
+  will-change: transform, filter;
   pointer-events: none;
   z-index: -1;
 }
@@ -41,8 +41,8 @@ body {
 }
 
 .content {
-  padding-bottom: 70vh;
-  padding-bottom: 70svh;
+  padding-bottom: 100vh;
+  padding-bottom: 100svh;
 }
 
 /* dual-inset sticky: held 6svh above the viewport bottom until its natural
@@ -69,6 +69,12 @@ body {
   mix-blend-mode: difference;
   pointer-events: none;
   user-select: none;
+  transition: letter-spacing 0.5s ease;
+}
+
+/* once pinned at the top, relax to normal tracking */
+.void-title.is-pinned {
+  letter-spacing: 0em;
 }
 
 .lorem {
@@ -81,6 +87,17 @@ body {
   text-align: center;
   color: #ffffff;
   mix-blend-mode: difference;
+}
+
+/* --mist (0..1, set by js) fades and disperses a paragraph as it nears
+   the top: it dims, swells outward, drifts upward, and blurs away.
+   only opacity/transform/filter are animated — nothing that reflows
+   text, so words never re-wrap mid-fade */
+.lorem p {
+  opacity: calc(1 - var(--mist, 0));
+  transform: translateY(calc(var(--mist, 0) * -1.5rem)) scale(calc(1 + var(--mist, 0) * 0.08));
+  filter: blur(calc(var(--mist, 0) * 10px));
+  will-change: transform, filter, opacity;
 }
 
 .lorem p + p {
@@ -104,7 +121,7 @@ body {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .glow-circle {
+  .void-title {
     transition: none;
   }
 }
