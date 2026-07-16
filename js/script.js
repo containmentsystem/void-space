@@ -3,7 +3,7 @@ const whiteCircle = document.querySelector('.glow-circle--white');
 const spacer = document.querySelector('.void-spacer');
 const title = document.querySelector('.void-title');
 const duality = document.querySelector('.duality');
-const paragraphs = Array.from(document.querySelectorAll('.lorem p'));
+const paragraphs = Array.from(document.querySelectorAll('.lorem p, .duality .block'));
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 

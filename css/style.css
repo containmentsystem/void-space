@@ -53,8 +53,8 @@ body {
 }
 
 .content {
-  padding-bottom: 40vh;
-  padding-bottom: 40svh;
+  padding-bottom: 75vh;
+  padding-bottom: 75svh;
 }
 
 /* dual-inset sticky: held 6svh above the viewport bottom until its natural
@@ -101,11 +101,12 @@ body {
   mix-blend-mode: difference;
 }
 
-/* --mist (0..1, set by js) fades and disperses a paragraph as it nears
+/* --mist (0..1, set by js) fades and disperses a text block as it nears
    the top: it dims, swells outward, drifts upward, and blurs away.
    only opacity/transform/filter are animated — nothing that reflows
    text, so words never re-wrap mid-fade */
-.lorem p {
+.lorem p,
+.duality .block {
   opacity: calc(1 - var(--mist, 0));
   transform: translateY(calc(var(--mist, 0) * -1.5rem)) scale(calc(1 + var(--mist, 0) * 0.08));
   filter: blur(calc(var(--mist, 0) * 10px));
@@ -121,26 +122,27 @@ body {
 .duality {
   margin-top: 100vh;
   margin-top: 100svh;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1.5rem;
+  padding: 0 1.25rem;
 }
 
 .duality .block {
+  flex: 0 1 45%;
   max-width: 22rem;
-  padding: 0 1.25rem;
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   line-height: 1.8;
   color: #000000;
 }
 
 .duality .block--left {
-  margin-right: auto;
   text-align: left;
 }
 
 .duality .block--right {
-  margin-left: auto;
   text-align: right;
-  margin-top: 30vh;
-  margin-top: 30svh;
 }
 
 @media (min-width: 40rem) {
@@ -158,9 +160,12 @@ body {
     margin-top: 1.5rem;
   }
 
+  .duality {
+    padding: 0 2rem;
+  }
+
   .duality .block {
     max-width: 26rem;
-    padding: 0 2rem;
     font-size: 1rem;
     line-height: 1.9;
   }
